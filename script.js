@@ -1,17 +1,35 @@
 let videoPlayer = document.querySelector("video");
 let recordBtn = document.querySelector("#record");
 let captureBtn = document.querySelector("#capture")
+let allFilters = document.querySelectorAll(".filter");
+let body = document.querySelector("body");
 
 let mediRecorder;
 let chunks = [];
 let isRecording = false;
+let filter = "";
+
+for (let i = 0; i < allFilters.length; i++) {
+    allFilters[i].addEventListener("click", function (e) {
+
+        let previousFilter = document.querySelector(".filter-div");
+        if (previousFilter) previousFilter.remove();
+
+        let color = e.currentTarget.style.backgroundColor;
+        filter = color;
+        let div = document.createElement("div");
+        div.classList.add("filter-div");
+        div.style.backgroundColor = color;
+        body.append(div);
+    })
+}
 
 captureBtn.addEventListener("click", function () {
     let innerSpan = captureBtn.querySelector("span");
     innerSpan.classList.add("captured-animation");
 
     setTimeout(() => {
-        innerSpan.classList.remove("captured-animation")
+        innerSpan.classList.remove("captured-animation");
     }, 1000);
 
     let canvas = document.createElement("canvas");
@@ -20,6 +38,11 @@ captureBtn.addEventListener("click", function () {
 
     let tool = canvas.getContext("2d");
     tool.drawImage(videoPlayer, 0, 0);
+
+    if (filter != "") {
+        tool.fillStyle = filter;
+        tool.fillRect(0, 0, canvas.width, canvas.height);
+    }
 
     let url = canvas.toDataURL();
 
@@ -32,6 +55,11 @@ captureBtn.addEventListener("click", function () {
 
 recordBtn.addEventListener("click", function (e) {
     let innerSpan = recordBtn.querySelector("span");
+
+    let previousFilter = document.querySelector(".filter-div");
+    if (previousFilter) previousFilter.remove();
+
+    filter = "";
 
     if (isRecording) {
         mediaRecorder.stop();

@@ -26,6 +26,7 @@ button {
   border-radius: 50%;
   background: transparent;
   border: 3px solid white;
+  z-index: 2;
 }
 
 button span {
@@ -34,6 +35,7 @@ button span {
   /* border: 1px solid; */
   display: inline-block;
   border-radius: 50%;
+  cursor: pointer;
 }
 
 #record span {
@@ -61,6 +63,34 @@ button span {
   animation: shrinkDownUp;
   animation-duration: 0.75s;
   animation-iteration-count: infinite;
+}
+
+.filters {
+  width: 4rem;
+  height: 16rem;
+  position: fixed;
+  top: 14rem;
+  left: 3rem;
+  border: 1px solid white;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+}
+
+.filter {
+  border: 1px solid white;
+  flex-grow: 1;
+  background-image: url("https://images.unsplash.com/photo-1627387769329-8cc5dbbe44ee?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80");
+  background-size: cover;
+  background-blend-mode: color-burn;
+}
+
+.filter-div {
+  position: fixed;
+  top: 0;
+  height: 100vh;
+  width: 100vw;
+  z-index: 1;
 }
 
 @keyframes shrinkDownUp {
