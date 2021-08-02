@@ -71,7 +71,6 @@ button span {
   position: fixed;
   top: 14rem;
   left: 3rem;
-  border: 1px solid white;
   display: flex;
   flex-direction: column;
   z-index: 2;
@@ -91,6 +90,45 @@ button span {
   height: 100vh;
   width: 100vw;
   z-index: 1;
+}
+
+.zoom {
+  width: 3.5rem;
+  height: 8rem;
+  position: fixed;
+  right: 3rem;
+  top: 5rem;
+  display: flex;
+  flex-direction: column;
+  background-color: #332e2e;
+  border-radius: 1rem;
+}
+
+.zoom div {
+  flex-grow: 1;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+}
+
+.zoom div:hover {
+  transform: scale(0.9);
+  cursor: pointer;
+}
+
+.gallery {
+  bottom: 11rem;
+  right: 3rem;
+  color: white;
+  font-size: 1.8rem;
+  cursor: pointer;
+}
+
+.gallery:hover {
+  animation: shrinkDownUp;
+  animation-duration: 1s;
 }
 
 @keyframes shrinkDownUp {

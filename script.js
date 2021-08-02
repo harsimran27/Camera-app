@@ -3,11 +3,35 @@ let recordBtn = document.querySelector("#record");
 let captureBtn = document.querySelector("#capture")
 let allFilters = document.querySelectorAll(".filter");
 let body = document.querySelector("body");
+let zoomIn = document.querySelector(".zoom-in");
+let zoomOut = document.querySelector(".zoom-out");
+let galleryBtn = document.querySelector(".gallery");
 
 let mediRecorder;
 let chunks = [];
 let isRecording = false;
 let filter = "";
+let currZoomLevel = 1;
+
+galleryBtn.addEventListener("click", function () {
+    location.assign("gallery.html");
+})
+
+zoomIn.addEventListener("click", function () {
+    currZoomLevel = currZoomLevel + 0.1;
+    if (currZoomLevel > 3) {
+        currZoomLevel = 3;
+    }
+    videoPlayer.style.transform = `scale(${currZoomLevel})`;
+})
+
+zoomOut.addEventListener("click", function () {
+    currZoomLevel = currZoomLevel - 0.1;
+    if (currZoomLevel < 1) {
+        currZoomLevel = 1;
+    }
+    videoPlayer.style.transform = `scale(${currZoomLevel})`
+})
 
 for (let i = 0; i < allFilters.length; i++) {
     allFilters[i].addEventListener("click", function (e) {
@@ -69,6 +93,8 @@ recordBtn.addEventListener("click", function (e) {
         mediaRecorder.start();
         isRecording = true;
         innerSpan.classList.add("record-animation");
+        currZoomLevel = 1;
+        videoPlayer.style.transform = `scale(${currZoomLevel})`;
     }
 })
 
@@ -98,5 +124,7 @@ promiseUseCamera.then(function (mediaStream) {
         a.click();
         a.remove();
     })
+}).catch(function () {
+    console.log("Error occured");
 })
 
