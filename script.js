@@ -13,11 +13,11 @@ let isRecording = false;
 let filter = "";
 let currZoomLevel = 1;
 
-galleryBtn.addEventListener("click", function () {
+galleryBtn.addEventListener("click", () => {
     location.assign("gallery.html");
 })
 
-zoomIn.addEventListener("click", function () {
+zoomIn.addEventListener("click", () => {
     currZoomLevel = currZoomLevel + 0.1;
     if (currZoomLevel > 3) {
         currZoomLevel = 3;
@@ -25,7 +25,7 @@ zoomIn.addEventListener("click", function () {
     videoPlayer.style.transform = `scale(${currZoomLevel})`;
 })
 
-zoomOut.addEventListener("click", function () {
+zoomOut.addEventListener("click", () => {
     currZoomLevel = currZoomLevel - 0.1;
     if (currZoomLevel < 1) {
         currZoomLevel = 1;
@@ -34,7 +34,7 @@ zoomOut.addEventListener("click", function () {
 })
 
 for (let i = 0; i < allFilters.length; i++) {
-    allFilters[i].addEventListener("click", function (e) {
+    allFilters[i].addEventListener("click", (e) => {
 
         let previousFilter = document.querySelector(".filter-div");
         if (previousFilter) previousFilter.remove();
@@ -48,7 +48,7 @@ for (let i = 0; i < allFilters.length; i++) {
     })
 }
 
-captureBtn.addEventListener("click", function () {
+captureBtn.addEventListener("click", () => {
     let innerSpan = captureBtn.querySelector("span");
     innerSpan.classList.add("captured-animation");
 
@@ -70,11 +70,6 @@ captureBtn.addEventListener("click", function () {
 
     let url = canvas.toDataURL();
     saveMedia(url);
-    // let a = document.createElement("a");
-    // a.href = url;
-    // a.download = "image.png";
-    // a.click();
-    // a.remove();
 })
 
 recordBtn.addEventListener("click", function (e) {
@@ -117,15 +112,9 @@ promiseUseCamera.then(function (mediaStream) {
         let blob = new Blob(chunks, { type: "video/mp4" });
         chunks = [];
         saveMedia(blob);
-        // let link = URL.createObjectURL(blob);
-
-        // let a = document.createElement("a");
-        // a.href = link;
-        // a.download = "video.mp4";
-        // a.click();
-        // a.remove();
     })
 }).catch(function () {
     console.log("Error occured");
 })
+
 

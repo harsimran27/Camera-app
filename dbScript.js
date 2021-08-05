@@ -62,9 +62,9 @@ let viewMedia = () => {
                 let img = document.createElement("img");
                 img.src = data;
 
-                // downloadBtn.addEventListener("click", () => {
-
-                // })
+                downloadBtn.addEventListener("click", () => {
+                    downloadMedia(data, "img");
+                })
 
                 actualMedia.append(img);
             } else if (type == "object") {
@@ -77,10 +77,29 @@ let viewMedia = () => {
                 video.loop = true;
                 video.muted = true;
 
+                downloadBtn.addEventListener("click", () => {
+                    downloadMedia(url, "video");
+                })
+
                 actualMedia.append(video);
             }
             galleryContainer.append(mediaCard);
             cursor.continue();
         }
     })
+}
+
+let downloadMedia = (url, type) => {
+
+    let anchorTag = document.createElement("a");
+    anchorTag.href = url;
+
+    if (type == "image") {
+        anchorTag.download = "image.png";
+    } else {
+        anchorTag.download = "video.mp4";
+    }
+
+    anchorTag.click();
+    anchorTag.remove();
 }

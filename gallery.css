@@ -29,6 +29,7 @@
   height: 10%;
   position: absolute;
   top: 0;
+  cursor: pointer;
 }
 
 .media-buttons div {
@@ -47,8 +48,28 @@
   right: 0.1rem;
 }
 
+.download:hover,
+.delete:hover {
+  animation: shrinkDownUp;
+  animation-duration: 1s;
+}
+
 .actual-media img,
 .actual-media video {
   height: 26vh;
   width: 100%;
+}
+
+@keyframes shrinkDownUp {
+  0% {
+    transform: scale(1);
+  }
+
+  50% {
+    transform: scale(0.9);
+  }
+
+  100% {
+    transform: scale(1);
+  }
 }
