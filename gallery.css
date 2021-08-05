@@ -4,12 +4,37 @@
   padding: 0;
 }
 
+body {
+  font-family: "Noto Sans JP", sans-serif;
+}
+
 .gallery-container {
   width: 100vw;
   height: 100vh;
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  font-size: 3rem;
+  align-items: center;
+  letter-spacing: 0.6rem;
+  text-shadow: 1px 1px 1px #fff, 3px 3px 5px grey;
+}
+
+.backToCamera {
+  position: fixed;
+  top: 1rem;
+  left: 1rem;
+  border: 4px solid grey;
+  font-size: 1.7rem;
+  border-radius: 50%;
+  padding: 0.5rem;
+  color: lightslategrey;
+}
+
+.backToCamera:hover {
+  animation: shrinkDownUp;
+  animation-duration: 1s;
+  cursor: pointer;
 }
 
 .media-card {

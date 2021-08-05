@@ -2,6 +2,7 @@ let galleryContainer = document.querySelector(".gallery-container");
 
 let req = indexedDB.open("gallery", 1);
 let database;
+let numberOfMedia = 0;
 
 req.addEventListener("success", () => {
     database = req.result;
@@ -41,12 +42,14 @@ let viewMedia = () => {
         cursor = req.result;
 
         if (cursor) {
+            numberOfMedia++;
+
             let mediaCard = document.createElement("div")
             mediaCard.classList.add("media-card");
             mediaCard.innerHTML = `<div class="actual-media"></div>
                                     <div class="media-buttons">
                                         <div class="download material-icons">file_download</div>
-                                        <div class="delete material-icons">delete</div>
+                                        <div data-mId = "${cursor.value.mId}" class="delete material-icons">delete</div>
                                     </div>`;
 
             let data = cursor.value.mediaData;
@@ -54,6 +57,13 @@ let viewMedia = () => {
             let actualMedia = mediaCard.querySelector(".actual-media");
             let downloadBtn = mediaCard.querySelector(".download");
             let deleteBtn = mediaCard.querySelector(".delete");
+
+            deleteBtn.addEventListener("click", (e) => {
+                let mId = Number(e.currentTarget.getAttribute("data-mId"));
+                deleteMedia(mId);
+
+                e.currentTarget.parentElement.parentElement.remove();
+            })
 
             let type = typeof data;
 
@@ -85,6 +95,10 @@ let viewMedia = () => {
             }
             galleryContainer.append(mediaCard);
             cursor.continue();
+        } else {
+            if (numberOfMedia == 0) {
+                galleryContainer.innerText = "No media present";
+            }
         }
     })
 }
@@ -102,4 +116,10 @@ let downloadMedia = (url, type) => {
 
     anchorTag.click();
     anchorTag.remove();
+}
+
+let deleteMedia = (mId) => {
+    let tx = database.transaction("media", "readwrite");
+    let mediaObjectStore = tx.objectStore("media");
+    mediaObjectStore.delete(mId);
 }

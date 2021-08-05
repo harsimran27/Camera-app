@@ -7,17 +7,27 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="gallery.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400&display=swap" rel="stylesheet">
     <title>Gallery</title>
 </head>
 
 <body>
     <div class="gallery-container"></div>
+    <button class="backToCamera material-icons">photo_camera</button>
 </body>
 <script src="dbScript.js"></script>
 <script>
     setTimeout(() => {
         viewMedia();
     }, 100);
+
+    let backToCameraBtn = document.querySelector(".backToCamera");
+    backToCameraBtn.addEventListener("click", () => {
+        location.assign("index.html");
+    })
+
 </script>
 
 </html>
